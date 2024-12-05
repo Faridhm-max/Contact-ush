@@ -4,6 +4,12 @@ document.getElementById('contactForm').addEventListener('submit', function(event
     const contactEmail = document.getElementById('email').value;
     const message = document.getElementById('message').value;
 
+    // التحقق من صحة البريد الإلكتروني
+    if (!validateEmail(contactEmail)) {
+        alert('يرجى إدخال بريد إلكتروني صالح.');
+        return;
+    }
+
     // إعداد بريد الإلكتروني لإرساله عبر EmailJS
     emailjs.send('service_ixc91fm', 'template_rrlfesd', {
         to_email: 'Faridhm214@gmail.com',
@@ -19,3 +25,8 @@ document.getElementById('contactForm').addEventListener('submit', function(event
        alert('حدث خطأ أثناء إرسال الرسالة.');
     });
 });
+
+function validateEmail(email) {
+    const re = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    return re.test(String(email).toLowerCase());
+}
